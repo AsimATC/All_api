@@ -17,11 +17,17 @@
 
     //print_r($data);
 
-  
+
 
     $degisim = $data['resat-altin']['Değişim'];
-    
-    if ($degisim <= 0) {
+
+
+    $degisim2 = str_replace("%", "", $degisim);
+    $deger = str_replace(",", "", $degisim2);
+
+    // echo $deger;
+
+    if (($deger * 100) >= 0) {
         echo '<div style="color:green;">' . $degisim . ' </div>';
     } else {
         echo '<div style="color:red;">' . $degisim . ' </div>';
