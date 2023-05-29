@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        th{
+        th {
             font-weight: bold;
             font-size: 14px;
             padding: 10px;
             background-color: #f1f1f1;
         }
-        td{
+
+        td {
             padding: 4px;
             border-bottom: 1px solid #eeeeee;
         }
@@ -22,36 +23,34 @@
 
 <body>
 
-    <?php
+<?php
 
-    $curl = curl_init();
+$curl = curl_init();
 
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.collectapi.com/football/results?data.league=super-lig",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "authorization: apikey 0iT8yXDbBKwVsmd2XGWzd6:7qCyU81GDUwdKMQ2A9iedp",
-            "content-type: application/json"
-        ),
-    ));
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.collectapi.com/football/league?data.league=super-lig",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "authorization: apikey 0iT8yXDbBKwVsmd2XGWzd6:7qCyU81GDUwdKMQ2A9iedp",
+    "content-type: application/json"
+  ),
+));
 
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
+$response = curl_exec($curl);
+$err = curl_error($curl);
 
-    curl_close($curl);
+curl_close($curl);
 
-    if ($err) {
-        echo "cURL Error #:" . $err;
-    } else {
-       // echo $response;
-        // Success Connet
-    }
-
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  //echo $response;
+}
     /////////////////////////////
     echo "<hr><pre>";
     $data = json_decode($response, true);
@@ -60,6 +59,7 @@
 
     $result = $data['result'];
 
+    //print_r($response);
     ?>
 
     <table>
@@ -74,10 +74,10 @@
             foreach ($result as $results) {
             ?>
                 <tr>
-                    <td><?php echo $results['skor']; ?></td>
-                    <td><?php echo $results['date']; ?></td>
-                    <td><?php echo $results['away']; ?></td>
-                    <td><?php echo $results['home']; ?></td>
+                    <td><?php echo $results['team']; ?></td>
+                    <td><?php echo $results['rank']; ?></td>
+                    <td><?php echo $results['lose']; ?></td>
+                    <td><?php echo $results['win']; ?></td>
                 </tr>
             <?php } ?>
         </tbody>
